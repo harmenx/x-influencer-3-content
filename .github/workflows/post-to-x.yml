@@ -38,7 +38,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Post to X (Twitter)
-        uses: ethan-ou/tweet-action@v1
+        uses: noweh/post-tweet-v2-action@v1.0
         with:
           TWEET_TEXT: ${{ env.TWEET_TEXT }}
           X_API_KEY: ${{ secrets.X_API_KEY }}
