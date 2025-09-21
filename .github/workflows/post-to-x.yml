@@ -25,7 +25,7 @@ jobs:
       - name: Run Post Generation
         id: generate
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          POE_API_KEY: ${{ secrets.POE_API_KEY }}
         run: python generate_posts.py
 
       - name: Read Post Content

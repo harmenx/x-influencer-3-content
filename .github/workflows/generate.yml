@@ -1,10 +1,10 @@
 # .github/workflows/generate.yml
 name: Generate AI Posts
 
-on:
-  schedule:
-    - cron: '0-59 6-11 * * *' # Random minute between 6 AM and 11 AM UTC
-  workflow_dispatch:   # Allows manual trigger
+# on:
+#   schedule:
+#     - cron: '0-59 6-11 * * *' # Random minute between 6 AM and 11 AM UTC
+#   workflow_dispatch:   # Allows manual trigger
 
 jobs:
   generate:
@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Post Generation
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          POE_API_KEY: ${{ secrets.POE_API_KEY }}
         run: python generate_posts.py
 
       - name: Commit and Push
