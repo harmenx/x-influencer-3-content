@@ -62,9 +62,9 @@ for i, tweet_part in enumerate(tweets_to_post):
         if i == 0:
             response = client.create_tweet(text=tweet_part)
         else:
-            # Wait for 10 seconds before posting subsequent tweets in a thread
-            logging.info("Waiting 10 seconds before posting next tweet part...")
-            time.sleep(10)
+            # Wait for 30 seconds before posting subsequent tweets in a thread
+            logging.info("Waiting 30 seconds before posting next tweet part...")
+            time.sleep(30)
             response = client.create_tweet(text=tweet_part, in_reply_to_tweet_id=last_tweet_id)
         
         last_tweet_id = response.data['id']
