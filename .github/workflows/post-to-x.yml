@@ -26,11 +26,9 @@ jobs:
         id: generate
         env:
           POE_API_KEY: ${{ secrets.POE_API_KEY }}
-        run: python generate_posts.py
-
-      - name: Capture Generated Tweets
-        id: capture_tweets
-        run: echo "TWEET_TEXT<<EOF" >> $GITHUB_ENV && echo "${{ steps.generate.outputs.stdout }}" >> $GITHUB_ENV && echo "EOF" >> $GITHUB_ENV
+        run: |
+          TWEET_TEXT=$(python generate_posts.py)
+          echo "TWEET_TEXT=$TWEET_TEXT" >> $GITHUB_ENV
 
       - name: Post to X (Twitter)
         run: python post_to_x.py
