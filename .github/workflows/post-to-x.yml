@@ -40,11 +40,11 @@ jobs:
       - name: Post to X (Twitter)
         uses: noweh/post-tweet-v2-action@v1.0
         with:
-          TWEET_TEXT: ${{ env.TWEET_TEXT }}
-          X_API_KEY: ${{ secrets.X_API_KEY }}
-          X_API_SECRET: ${{ secrets.X_API_SECRET }}
-          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          message: ${{ env.TWEET_TEXT }}
+          consumer-key: ${{ secrets.X_API_KEY }}
+          consumer-secret: ${{ secrets.X_API_SECRET }}
+          access-token: ${{ secrets.X_ACCESS_TOKEN }}
+          access-token-secret: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
 
       - name: Commit and Push
         run: |
