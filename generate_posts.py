@@ -1,6 +1,7 @@
 # generate_posts.py
 import os
 import json
+import sys # Import sys
 from openai import OpenAI
 from datetime import datetime
 
@@ -21,7 +22,7 @@ with open("prompt.txt", "r", encoding="utf-8") as f:
 
 def generate_tweets():
     """Generates a list of tweets using the Poe API, expecting a JSON array response."""
-    print("Generating tweets...")
+    print("Generating tweets...", file=sys.stderr) # Redirect to stderr
     # Modify the prompt to instruct Poe to return a JSON array of strings
     json_prompt = PROMPT + "\n\nPlease return the response as a JSON array of strings, where each string is a tweet. Each tweet should be a maximum of 140 characters."
     
@@ -44,12 +45,12 @@ def generate_tweets():
             raise ValueError("Poe response is not a JSON list of strings.")
         return tweets
     except json.JSONDecodeError as e:
-        print(f"Error decoding JSON from Poe: {e}")
-        print(f"Poe's raw response: {json_response}")
+        print(f"Error decoding JSON from Poe: {e}", file=sys.stderr) # Redirect to stderr
+        print(f"Poe's raw response: {json_response}", file=sys.stderr) # Redirect to stderr
         exit(1)
     except ValueError as e:
-        print(f"Error: {e}")
-        print(f"Poe's raw response: {json_response}")
+        print(f"Error: {e}", file=sys.stderr) # Redirect to stderr
+        print(f"Poe's raw response: {json_response}", file=sys.stderr) # Redirect to stderr
         exit(1)
 
 def save_raw_response(json_string):
@@ -58,7 +59,7 @@ def save_raw_response(json_string):
     filename = f"{POSTS_DIR}/raw_tweets_{timestamp}.md"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(json_string)
-    print(f"Saved raw JSON response: {filename}")
+    print(f"Saved raw JSON response: {filename}", file=sys.stderr) # Redirect to stderr
 
 if __name__ == "__main__":
     tweets_list = generate_tweets()
@@ -66,7 +67,7 @@ if __name__ == "__main__":
     save_raw_response(json_output)
     
     # Output the JSON string for the GitHub Action
-    print(json_output)
+    print(json_output) # This should be the only thing printed to stdout
 
     # The GitHub Action expects an output named 'filename' for the next step.
     # Since we are now outputting the JSON directly, we can output a dummy filename
