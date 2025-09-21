@@ -30,15 +30,6 @@ jobs:
           TWEET_TEXT=$(python generate_posts.py)
           echo "TWEET_TEXT=$TWEET_TEXT" >> $GITHUB_ENV
 
-      - name: Post to X (Twitter)
-        run: python post_to_x.py
-        env:
-          X_API_KEY: ${{ secrets.X_API_KEY }}
-          X_API_SECRET: ${{ secrets.X_API_SECRET }}
-          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
-          TWEET_TEXT: ${{ env.TWEET_TEXT }}
-
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -50,4 +41,12 @@ jobs:
           git add generated_posts/*.md
           git diff-index --quiet HEAD || git commit -m "Auto-generate and post [skip ci]"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/harmenx/x-influencer.git HEAD:main
-   
+
+      - name: Post to X (Twitter)
+        run: python post_to_x.py
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          TWEET_TEXT: ${{ env.TWEET_TEXT }}
