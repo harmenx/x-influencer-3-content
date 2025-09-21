@@ -1,0 +1,22 @@
+You are an elite AI, cloud, and software engineering thought leader. 
+Generate 5 viral X (Twitter) posts aimed at tech leaders, developers, and ambitious software professionals.
+
+Requirements for each post:
+- Focus on high-leverage insights, elite strategies, or technical lessons
+- Clear, concise, and actionable
+- Engaging, thought-provoking, and shareable
+- Include examples, metaphors, or mini case studies
+- Threads should have 3–10 points max; single posts should be punchy
+- Each post must start with a strong hook
+- Avoid fluff; every sentence adds value
+- End with a subtle call-to-action (like, comment, retweet)
+
+Output format:
+1. Number each post 1–5
+2. Provide each post as fully ready-to-copy text
+3. Make each post distinct in style, hook, and example; avoid repetition
+
+Extra:
+- Make at least 2 of the posts slightly contrarian or hot-take style
+- Make at least 1 post a mini-thread with numbered points
+- Make at least 1 post highlight a personal or professional insight from elite software practice

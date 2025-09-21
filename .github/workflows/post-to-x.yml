@@ -1,0 +1,55 @@
+# .github/workflows/post-to-x.yml
+name: Generate and Post to X
+
+on:
+  schedule:
+    # Runs every 3 hours
+    - cron: '0 */3 * * *'
+  workflow_dispatch:   # Allows manual trigger
+
+jobs:
+  generate-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install openai
+
+      - name: Run Post Generation
+        id: generate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python generate_posts.py
+
+      - name: Read Post Content
+        id: post_content
+        run: |
+          CONTENT=$(cat ${{ steps.generate.outputs.filename }})
+          # This is a trick to pass multiline strings to the next step
+          echo "TWEET_TEXT<<EOF" >> $GITHUB_ENV
+          echo "$CONTENT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Post to X (Twitter)
+        uses: ethan-ou/tweet-action@v1
+        with:
+          TWEET_TEXT: ${{ env.TWEET_TEXT }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+
+      - name: Commit and Push
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add generated_posts/*.md
+          git commit -m "Auto-generate and post [skip ci]" || echo "No changes to commit"
+          git push
