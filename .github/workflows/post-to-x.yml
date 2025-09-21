@@ -20,7 +20,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install openai python-dotenv
+        run: pip install openai python-dotenv tweepy
 
       - name: Run Post Generation
         id: generate
