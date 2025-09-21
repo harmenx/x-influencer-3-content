@@ -28,14 +28,9 @@ jobs:
           POE_API_KEY: ${{ secrets.POE_API_KEY }}
         run: python generate_posts.py
 
-      - name: Read Post Content
-        id: post_content
-        run: |
-          CONTENT=$(cat ${{ steps.generate.outputs.filename }})
-          # This is a trick to pass multiline strings to the next step
-          echo "TWEET_TEXT<<EOF" >> $GITHUB_ENV
-          echo "$CONTENT" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+      - name: Capture Generated Tweets
+        id: capture_tweets
+        run: echo "TWEET_TEXT<<EOF" >> $GITHUB_ENV && echo "${{ steps.generate.outputs.stdout }}" >> $GITHUB_ENV && echo "EOF" >> $GITHUB_ENV
 
       - name: Post to X (Twitter)
         run: python post_to_x.py

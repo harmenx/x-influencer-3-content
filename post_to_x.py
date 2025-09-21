@@ -1,6 +1,8 @@
 import os
 import tweepy
 import logging
+import json
+import time # Import the time module
 from dotenv import load_dotenv
 
 # Configure logging
@@ -23,66 +25,22 @@ if not all([consumer_key, consumer_secret, access_token, access_token_secret]):
 logging.info("X API credentials loaded.")
 
 # Get tweet text from environment variable
-tweet_text = os.getenv("TWEET_TEXT")
+tweet_json_string = os.getenv("TWEET_TEXT")
 
-print("XKEYS",consumer_key, consumer_secret, access_token, access_token_secret, tweet_text)
-
-if not tweet_text:
-    logging.error("Error: TWEET_TEXT environment variable is not set.")
+if not tweet_json_string:
+    logging.error("Error: TWEET_TEXT environment variable is not set or is empty.")
     exit(1)
 
-logging.info(f"Original tweet text loaded (first 50 chars): {tweet_text[:50]}...")
+try:
+    tweets_to_post = json.loads(tweet_json_string)
+    if not isinstance(tweets_to_post, list) or not all(isinstance(t, str) for t in tweets_to_post):
+        logging.error("Error: TWEET_TEXT is not a valid JSON list of strings.")
+        exit(1)
+except json.JSONDecodeError as e:
+    logging.error(f"Error decoding TWEET_TEXT JSON: {e}")
+    exit(1)
 
-def split_tweet(text, max_length=140):
-    """Splits a long text into multiple tweets, respecting max_length and adding pagination."""
-    tweets = []
-    words = text.split(' ')
-    current_tweet = []
-    current_length = 0
-    
-    # Calculate max length for content, reserving space for " (X/N)"
-    # Max suffix length for 99 parts: " (99/99)" is 8 characters.
-    # For simplicity, let's reserve 10 characters for suffix to be safe.
-    suffix_reserve = 10 
-    content_max_length = max_length - suffix_reserve
-
-    for word in words:
-        # Check if adding the next word exceeds the content_max_length
-        # +1 for the space before the word
-        if current_length + len(word) + (1 if current_tweet else 0) > content_max_length:
-            if not current_tweet: # Handle case where a single word is too long
-                # If a single word is too long, it will be truncated by Twitter anyway,
-                # but we'll try to split it if possible, though Twitter's own splitting
-                # might be more sophisticated. For now, we'll just add it as is.
-                tweets.append(word)
-                current_tweet = []
-                current_length = 0
-                continue
-            tweets.append(" ".join(current_tweet))
-            current_tweet = [word]
-            current_length = len(word)
-        else:
-            current_tweet.append(word)
-            current_length += len(word) + (1 if len(current_tweet) > 1 else 0) # Add 1 for space
-
-    if current_tweet:
-        tweets.append(" ".join(current_tweet))
-
-    # Add pagination
-    total_tweets = len(tweets)
-    paginated_tweets = []
-    for i, tweet in enumerate(tweets):
-        suffix = f" ({i+1}/{total_tweets})"
-        # Ensure suffix fits. If not, truncate tweet content.
-        if len(tweet) + len(suffix) > max_length:
-            tweet = tweet[:max_length - len(suffix) - 1] + "…" # Truncate and add ellipsis
-        paginated_tweets.append(tweet + suffix)
-    
-    return paginated_tweets
-
-# Split the tweet text
-split_tweets = split_tweet(tweet_text)
-logging.info(f"Tweet split into {len(split_tweets)} parts.")
+logging.info(f"Loaded {len(tweets_to_post)} tweets from TWEET_TEXT.")
 
 # Authenticate with Tweepy
 try:
@@ -99,19 +57,22 @@ except Exception as e:
 
 # Post the tweets
 last_tweet_id = None
-for i, tweet_part in enumerate(split_tweets):
+for i, tweet_part in enumerate(tweets_to_post):
     try:
         if i == 0:
             response = client.create_tweet(text=tweet_part)
         else:
+            # Wait for 10 seconds before posting subsequent tweets in a thread
+            logging.info("Waiting 10 seconds before posting next tweet part...")
+            time.sleep(10)
             response = client.create_tweet(text=tweet_part, in_reply_to_tweet_id=last_tweet_id)
         
         last_tweet_id = response.data['id']
-        logging.info(f"Tweet part {i+1}/{len(split_tweets)} posted successfully! ID: {last_tweet_id}")
-        print(f"Tweet part {i+1}/{len(split_tweets)} posted successfully! ID: {last_tweet_id}")
+        logging.info(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
+        print(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
     except Exception as e:
-        logging.error(f"Error posting tweet part {i+1}/{len(split_tweets)}: {e}")
-        print(f"Error posting tweet part {i+1}/{len(split_tweets)}: {e}")
+        logging.error(f"Error posting tweet part {i+1}/{len(tweets_to_post)}: {e}")
+        print(f"Error posting tweet part {i+1}/{len(tweets_to_post)}: {e}")
         exit(1)
 
 logging.info("Script finished.")
