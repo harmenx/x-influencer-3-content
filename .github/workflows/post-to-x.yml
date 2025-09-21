@@ -38,12 +38,13 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Post to X (Twitter)
-        run: python test_x_post.py
+        run: python post_to_x.py
         env:
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          TWEET_TEXT: ${{ env.TWEET_TEXT }}
 
       - uses: actions/checkout@v3
         with:
