@@ -32,6 +32,12 @@ def generate_tweets():
     )
     json_response = response.choices[0].message.content.strip()
     
+    # Clean the response: remove markdown code block delimiters if present
+    if json_response.startswith("```json"):
+        json_response = json_response[len("```json"):].strip()
+    if json_response.endswith("```"):
+        json_response = json_response[:-len("```")].strip()
+    
     try:
         tweets = json.loads(json_response)
         if not isinstance(tweets, list) or not all(isinstance(t, str) for t in tweets):
