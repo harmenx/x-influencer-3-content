@@ -16,8 +16,16 @@ client = OpenAI(
 POSTS_DIR = "generated_posts"
 os.makedirs(POSTS_DIR, exist_ok=True)
 
-# Read prompt from prompt.txt
-with open("prompt.txt", "r", encoding="utf-8") as f:
+import argparse
+
+# Setup argument parser
+parser = argparse.ArgumentParser(description="Generate tweets from a prompt file.")
+parser.add_argument("--prompt", type=str, default="prompts/original_prompt.txt",
+                    help="Path to the prompt file.")
+args = parser.parse_args()
+
+# Read prompt from the specified file
+with open(args.prompt, "r", encoding="utf-8") as f:
     PROMPT = f.read()
 
 def generate_tweets():

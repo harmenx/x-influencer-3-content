@@ -3,8 +3,8 @@ name: Generate and Post to X
 
 on:
   schedule:
-    # Runs every 3 hours
-    - cron: '0 */12 * * *'
+    # Runs every 8 hours
+    - cron: '0 */8 * * *'
   workflow_dispatch:   # Allows manual trigger
 
 jobs:
@@ -27,7 +27,8 @@ jobs:
         env:
           POE_API_KEY: ${{ secrets.POE_API_KEY }}
         run: |
-          TWEET_TEXT=$(python generate_posts.py)
+          PROMPT_FILE=$(ls prompts | shuf -n 1)
+          TWEET_TEXT=$(python generate_posts.py --prompt "prompts/$PROMPT_FILE")
           echo "TWEET_TEXT=$TWEET_TEXT" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
