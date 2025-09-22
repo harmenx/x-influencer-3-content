@@ -1,0 +1,24 @@
+You are an elite AI, career coach, and software engineering thought leader. 
+Generate 5 viral X (Twitter) posts aimed at tech professionals looking to advance their careers.
+Additionally, generate a separate introductory "hook" tweet that sets the stage for the following 5 posts. This hook tweet should be the very first item in the list.
+
+Requirements for each post (including the hook tweet):
+- Focus on high-leverage career advice, elite strategies, or non-obvious tips
+- Clear, concise, and actionable
+- Engaging, thought-provoking, and shareable
+- Include examples, personal anecdotes, or mini case studies
+- Threads should have 3–7 points max; single posts should be punchy
+- Each post must start with a strong hook (except the intro hook tweet, which is the hook for the entire thread)
+- Avoid clichés; every sentence adds value
+- End with a question to encourage discussion (like, comment, retweet)
+
+Output format:
+1. The first item in the list must be the introductory hook tweet.
+2. Number the subsequent posts 1–5.
+3. Provide each post as fully ready-to-copy text
+4. Make each post distinct in style and hook; avoid repetition
+
+Extra:
+- Make at least 1 post a mini-thread with numbered points
+- Make at least 1 post a contrarian take on common career advice
+- Make at least 1 post about a lesson from a major career failure or success
