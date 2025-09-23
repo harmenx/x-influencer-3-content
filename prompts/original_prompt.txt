@@ -3,6 +3,7 @@ Generate 5 viral X (Twitter) posts aimed at tech leaders, developers, and ambiti
 Additionally, generate a separate introductory "hook" tweet that sets the stage for the following 5 posts. This hook tweet should be the very first item in the list.
 
 Requirements for each post (including the hook tweet):
+- Each tweet must be 260 characters max.
 - Focus on high-leverage insights, elite strategies, or technical lessons
 - Clear, concise, and actionable
 - Engaging, thought-provoking, and shareable
