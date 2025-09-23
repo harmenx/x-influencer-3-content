@@ -2,7 +2,8 @@ import os
 import tweepy
 import logging
 import json
-import time # Import the time module
+import time
+import random
 from dotenv import load_dotenv
 
 # Configure logging
@@ -11,6 +12,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 load_dotenv()
 
 logging.info("Starting post_to_x.py script.")
+
+# Add a random delay up to an hour (3600 seconds)
+random_delay_seconds = random.randint(0, 3600)
+logging.info(f"Delaying post for {random_delay_seconds} seconds...")
+time.sleep(random_delay_seconds)
+logging.info("Delay complete. Proceeding with post.")
 
 # Get environment variables
 consumer_key = os.getenv("X_API_KEY")
@@ -55,24 +62,36 @@ except Exception as e:
     logging.error(f"Error authenticating with Tweepy: {e}")
     exit(1)
 
-# Post the tweets
+# Post the tweets with retry logic
 last_tweet_id = None
+MAX_RETRIES = 3
+RETRY_DELAY_SECONDS = 30
+
 for i, tweet_part in enumerate(tweets_to_post):
-    try:
-        if i == 0:
-            response = client.create_tweet(text=tweet_part)
-        else:
-            # Wait for 30 seconds before posting subsequent tweets in a thread
-            logging.info("Waiting 30 seconds before posting next tweet part...")
-            time.sleep(30)
-            response = client.create_tweet(text=tweet_part, in_reply_to_tweet_id=last_tweet_id)
-        
-        last_tweet_id = response.data['id']
-        logging.info(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
-        print(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
-    except Exception as e:
-        logging.error(f"Error posting tweet part {i+1}/{len(tweets_to_post)}: {e}")
-        print(f"Error posting tweet part {i+1}/{len(tweets_to_post)}: {e}")
-        exit(1)
+    retry_count = 0
+    while retry_count < MAX_RETRIES:
+        try:
+            if i == 0:
+                response = client.create_tweet(text=tweet_part)
+            else:
+                # Wait for 30 seconds before posting subsequent tweets in a thread
+                logging.info("Waiting 30 seconds before posting next tweet part...")
+                time.sleep(30)
+                response = client.create_tweet(text=tweet_part, in_reply_to_tweet_id=last_tweet_id)
+            
+            last_tweet_id = response.data['id']
+            logging.info(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
+            print(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
+            break  # Break out of retry loop if successful
+        except Exception as e:
+            retry_count += 1
+            logging.error(f"Error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
+            print(f"Error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
+            if retry_count < MAX_RETRIES:
+                logging.info(f"Retrying in {RETRY_DELAY_SECONDS} seconds...")
+                time.sleep(RETRY_DELAY_SECONDS)
+            else:
+                logging.error(f"Failed to post tweet part {i+1}/{len(tweets_to_post)} after {MAX_RETRIES} attempts.")
+                exit(1)
 
 logging.info("Script finished.")
