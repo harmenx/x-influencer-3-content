@@ -71,6 +71,7 @@ for i, tweet_part in enumerate(tweets_to_post):
     retry_count = 0
     while retry_count < MAX_RETRIES:
         try:
+            logging.info(f"Attempting to post tweet part {i+1}/{len(tweets_to_post)}: {tweet_part[:100]}...") # Log first 100 chars
             if i == 0:
                 response = client.create_tweet(text=tweet_part)
             else:
@@ -81,12 +82,18 @@ for i, tweet_part in enumerate(tweets_to_post):
             
             last_tweet_id = response.data['id']
             logging.info(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
+            logging.info(f"Response data: {response.data}")
             print(f"Tweet part {i+1}/{len(tweets_to_post)} posted successfully! ID: {last_tweet_id}")
             break  # Break out of retry loop if successful
+        except tweepy.errors.TweepyException as e:
+            retry_count += 1
+            logging.error(f"Tweepy error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
+            logging.error(f"Tweepy error details: {e.response.text if e.response else 'No response text'}")
+            print(f"Tweepy error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
         except Exception as e:
             retry_count += 1
-            logging.error(f"Error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
-            print(f"Error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
+            logging.error(f"General error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
+            print(f"General error posting tweet part {i+1}/{len(tweets_to_post)} (Attempt {retry_count}/{MAX_RETRIES}): {e}")
             if retry_count < MAX_RETRIES:
                 logging.info(f"Retrying in {RETRY_DELAY_SECONDS} seconds...")
                 time.sleep(RETRY_DELAY_SECONDS)
