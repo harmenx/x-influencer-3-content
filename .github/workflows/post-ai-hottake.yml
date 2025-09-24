@@ -1,0 +1,39 @@
+name: Post AI Hottake to X
+
+on:
+  schedule:
+    # Runs every 3 hours
+    - cron: '0 */3 * * *'
+  workflow_dispatch:   # Allows manual trigger
+
+jobs:
+  generate-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install openai python-dotenv tweepy
+
+      - name: Run Post Generation for AI Hottake
+        id: generate
+        env:
+          POE_API_KEY: ${{ secrets.POE_API_KEY }}
+        run: |
+          TWEET_TEXT=$(python generate_posts.py --prompt "prompts/ai_hottake.txt")
+          echo "TWEET_TEXT=$TWEET_TEXT" >> $GITHUB_ENV
+
+      - name: Post to X (Twitter)
+        run: python post_to_x.py
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          TWEET_TEXT: ${{ env.TWEET_TEXT }}
