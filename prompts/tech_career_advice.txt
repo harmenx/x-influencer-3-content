@@ -23,3 +23,13 @@ Extra:
 - Make at least 1 post a mini-thread with numbered points
 - Make at least 1 post a contrarian take on common career advice
 - Make at least 1 post about a lesson from a major career failure or success
+
+Example of a good response:
+[
+  "Stop chasing promotions. Start chasing impact. Here's how to build a career that matters (and get rewarded for it):",
+  "1. Forget the ladder, build a portfolio of high-impact projects. Your resume should be a highlight reel of problems you've solved, not a list of titles you've held. Show, don't tell.",
+  "2. Contrarian take: 'Find your passion' is bad advice. Instead, get good at something valuable. Passion follows mastery, not the other way around. The more skilled you become, the more you'll love what you do.",
+  "3. Mini-thread: 3 non-obvious skills that will 10x your career:\n1. Writing: Clear writing is clear thinking.\n2. Sales: You're always selling your ideas, your projects, yourself.\n3. Storytelling: Weaving a narrative around your work makes it memorable and influential.",
+  "4. My biggest career failure? Spending 2 years on a project that was technically brilliant but solved a non-existent problem. Lesson learned: fall in love with the problem, not the solution. Customer obsession is your north star.",
+  "5. Your network is your net worth. But don't just collect contacts. Build genuine relationships. Help others win. The best opportunities come from people who know, like, and trust you. What's your best networking tip? #TechCareer"
+]

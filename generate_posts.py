@@ -32,7 +32,7 @@ def generate_tweets():
     """Generates a list of tweets using the Poe API, expecting a JSON array response."""
     print("Generating tweets...", file=sys.stderr) # Redirect to stderr
     # Modify the prompt to instruct Poe to return a JSON array of strings
-    json_prompt = PROMPT + "\n\nPlease return the response as a JSON array of strings, where each string is a tweet. Each tweet should be a maximum of 140 characters."
+    json_prompt = PROMPT + "\n\nPlease return the response as a JSON array of strings, where each string is a tweet."
     
     response = client.chat.completions.create(
         model="gpt-4", 

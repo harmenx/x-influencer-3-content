@@ -23,3 +23,13 @@ Extra:
 - Make at least 2 of the posts slightly contrarian or hot-take style
 - Make at least 1 post a mini-thread with numbered points
 - Make at least 1 post highlight a personal or professional insight from elite software practice
+
+Example of a good response:
+[
+  "Most companies are using cloud and AI all wrong. They're building faster horses instead of embracing the paradigm shift. Here are 5 hard-won lessons from the trenches of elite software practice:",
+  "1. Your microservices architecture is probably a distributed monolith. If a single service outage can cascade and take down your entire system, you haven't decoupled anything. True resilience comes from autonomy, not just separation.",
+  "2. Hot take: Serverless isn't about saving money on idle servers. It's about enforcing architectural discipline. When your functions have a 15-minute execution limit, you're forced to build small, focused, and scalable components.",
+  "3. Mini-thread: 3 signs your AI/ML project is doomed to fail:\n1. You're starting with the data, not the problem.\n2. Your data scientists are siloed from your product and engineering teams.\n3. You're more excited about the algorithm than the user experience.",
+  "4. Personal insight: The most effective engineers I know spend more time deleting code than writing it. Simplicity is the ultimate sophistication. A smaller, cleaner codebase is easier to understand, maintain, and evolve.",
+  "5. Stop chasing the latest shiny object. Master the fundamentals. A deep understanding of distributed systems, data structures, and computer networking will serve you far better than a superficial knowledge of the framework of the week. What fundamental skill do you think is most underrated?"
+]
