@@ -12,6 +12,7 @@ Requirements for each post (including the hook tweet):
 - Each post must start with a strong hook (except the intro hook tweet, which is the hook for the entire thread)
 - Avoid jargon and sensationalism; every sentence adds value
 - End with a question to encourage discussion (like, comment, retweet)
+- Include 2-3 relevant hashtags (e.g., #News, #CurrentEvents, #TechNews)
 
 Output format:
 1. The first item in the list must be the introductory hook tweet.
@@ -26,9 +27,9 @@ Extra:
 Example of a good response:
 [
   "The headlines are telling you one story, but the real story is hidden in the details. Here are 5 under-the-radar insights from this week's news that you might have missed:",
-  "1. That big tech acquisition everyone is talking about? It's not about market share. It's a talent acquisition. They're buying a team of 50 elite AI researchers. The IP is just a bonus. The war for talent is the real story.",
-  "2. Everyone is focused on the new social media app that just launched, but the real innovation is their decentralized identity protocol. This is a quiet but massive step towards a user-owned internet. Web3 is happening, just not like we expected.",
-  "3. Mini-thread: The new open-source LLM that just dropped is a bigger deal than you think.\n1. It's small enough to run on a laptop, democratizing access to powerful AI.\n2. It's released with a permissive license, encouraging commercial use.\n3. It's a wake-up call for the big players. The future of AI is open.",
-  "4. Connecting the dots: A major shipping lane is disrupted, and a new trade agreement is signed on the same day. These aren't isolated events. They're two sides of the same coin: the global supply chain is reconfiguring in real-time. Expect more volatility.",
-  "5. The media is framing the latest election as a political drama, but the real story is the sophisticated use of AI in campaign messaging and voter targeting. It's a new era of political communication, and we're not ready for it. What are the ethical implications?"
+  "1. That big tech acquisition everyone is talking about? It's not about market share. It's a talent acquisition. They're buying a team of 50 elite AI researchers. The IP is just a bonus. The war for talent is the real story. #TechNews #Acquisition",
+  "2. Everyone is focused on the new social media app that just launched, but the real innovation is their decentralized identity protocol. This is a quiet but massive step towards a user-owned internet. Web3 is happening, just not like we expected. #Web3 #Decentralization",
+  "3. Mini-thread: The new open-source LLM that just dropped is a bigger deal than you think.\n1. It's small enough to run on a laptop, democratizing access to powerful AI.\n2. It's released with a permissive license, encouraging commercial use.\n3. It's a wake-up call for the big players. The future of AI is open. #OpenSource #AI #LLM",
+  "4. Connecting the dots: A major shipping lane is disrupted, and a new trade agreement is signed on the same day. These aren't isolated events. They're two sides of the same coin: the global supply chain is reconfiguring in real-time. Expect more volatility. #Geopolitics #SupplyChain",
+  "5. The media is framing the latest election as a political drama, but the real story is the sophisticated use of AI in campaign messaging and voter targeting. It's a new era of political communication, and we're not ready for it. What are the ethical implications? #AIinPolitics #Ethics"
 ]

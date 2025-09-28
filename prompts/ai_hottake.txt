@@ -1,6 +1,6 @@
-Generate a single, concise, and thought-provoking hot take or insight about Artificial Intelligence. The tweet should be under 280 characters and suitable for a professional audience. Focus on a current trend, a controversial opinion, or a future prediction in the AI space. Do not include hashtags.
+Generate a single, concise, and thought-provoking hot take or insight about Artificial Intelligence. The tweet should be under 280 characters and suitable for a professional audience. Focus on a current trend, a controversial opinion, or a future prediction in the AI space. Include 2-3 relevant hashtags (e.g., #AI, #ArtificialIntelligence, #MachineLearning).
 
 Examples of good hot takes:
-- "The AGI race is the single biggest existential threat to humanity, and we're letting tech bros in hoodies lead the charge without any real oversight. What could possibly go wrong?"
-- "We're so focused on generative AI for text and images that we're overlooking the massive potential of generative AI for complex systems modeling. The real revolution will be in simulating economies, supply chains, and climate."
-- "In 5 years, AI-powered code generation won't just be about autocompleting functions. It will be about generating entire applications from a high-level spec, making software engineering more about architecture and product vision than coding."
+- "The AGI race is the single biggest existential threat to humanity, and we're letting tech bros in hoodies lead the charge without any real oversight. What could possibly go wrong? #AI #ExistentialRisk"
+- "We're so focused on generative AI for text and images that we're overlooking the massive potential of generative AI for complex systems modeling. The real revolution will be in simulating economies, supply chains, and climate. #GenAI #Simulation"
+- "In 5 years, AI-powered code generation won't just be about autocompleting functions. It will be about generating entire applications from a high-level spec, making software engineering more about architecture and product vision than coding. #AICoding #FutureOfSoftware"

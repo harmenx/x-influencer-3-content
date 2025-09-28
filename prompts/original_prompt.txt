@@ -12,6 +12,7 @@ Requirements for each post (including the hook tweet):
 - Each post must start with a strong hook (except the intro hook tweet, which is the hook for the entire thread)
 - Avoid fluff; every sentence adds value
 - End with a subtle call-to-action (like, comment, retweet)
+- Include 2-3 relevant hashtags (e.g., #CloudNative, #SoftwareArchitecture, #AI)
 
 Output format:
 1. The first item in the list must be the introductory hook tweet.
@@ -27,9 +28,9 @@ Extra:
 Example of a good response:
 [
   "Most companies are using cloud and AI all wrong. They're building faster horses instead of embracing the paradigm shift. Here are 5 hard-won lessons from the trenches of elite software practice:",
-  "1. Your microservices architecture is probably a distributed monolith. If a single service outage can cascade and take down your entire system, you haven't decoupled anything. True resilience comes from autonomy, not just separation.",
-  "2. Hot take: Serverless isn't about saving money on idle servers. It's about enforcing architectural discipline. When your functions have a 15-minute execution limit, you're forced to build small, focused, and scalable components.",
-  "3. Mini-thread: 3 signs your AI/ML project is doomed to fail:\n1. You're starting with the data, not the problem.\n2. Your data scientists are siloed from your product and engineering teams.\n3. You're more excited about the algorithm than the user experience.",
-  "4. Personal insight: The most effective engineers I know spend more time deleting code than writing it. Simplicity is the ultimate sophistication. A smaller, cleaner codebase is easier to understand, maintain, and evolve.",
-  "5. Stop chasing the latest shiny object. Master the fundamentals. A deep understanding of distributed systems, data structures, and computer networking will serve you far better than a superficial knowledge of the framework of the week. What fundamental skill do you think is most underrated?"
+  "1. Your microservices architecture is probably a distributed monolith. If a single service outage can cascade and take down your entire system, you haven't decoupled anything. True resilience comes from autonomy, not just separation. #SoftwareArchitecture #Microservices",
+  "2. Hot take: Serverless isn't about saving money on idle servers. It's about enforcing architectural discipline. When your functions have a 15-minute execution limit, you're forced to build small, focused, and scalable components. #Serverless #CloudNative",
+  "3. Mini-thread: 3 signs your AI/ML project is doomed to fail:\n1. You're starting with the data, not the problem.\n2. Your data scientists are siloed from your product and engineering teams.\n3. You're more excited about the algorithm than the user experience. #AI #MachineLearning #DataScience",
+  "4. Personal insight: The most effective engineers I know spend more time deleting code than writing it. Simplicity is the ultimate sophistication. A smaller, cleaner codebase is easier to understand, maintain, and evolve. #SoftwareEngineering #CleanCode",
+  "5. Stop chasing the latest shiny object. Master the fundamentals. A deep understanding of distributed systems, data structures, and computer networking will serve you far better than a superficial knowledge of the framework of the week. What fundamental skill do you think is most underrated? #Developer #Programming"
 ]

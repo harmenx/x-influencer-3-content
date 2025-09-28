@@ -12,6 +12,7 @@ Requirements for each post (including the hook tweet):
 - Each post must start with a strong hook (except the intro hook tweet, which is the hook for the entire thread)
 - Avoid clichés; every sentence adds value
 - End with a question to encourage discussion (like, comment, retweet)
+- Include 2-3 relevant hashtags (e.g., #TechCareer, #SoftwareEngineering, #CareerAdvice)
 
 Output format:
 1. The first item in the list must be the introductory hook tweet.
@@ -27,9 +28,9 @@ Extra:
 Example of a good response:
 [
   "Stop chasing promotions. Start chasing impact. Here's how to build a career that matters (and get rewarded for it):",
-  "1. Forget the ladder, build a portfolio of high-impact projects. Your resume should be a highlight reel of problems you've solved, not a list of titles you've held. Show, don't tell.",
-  "2. Contrarian take: 'Find your passion' is bad advice. Instead, get good at something valuable. Passion follows mastery, not the other way around. The more skilled you become, the more you'll love what you do.",
-  "3. Mini-thread: 3 non-obvious skills that will 10x your career:\n1. Writing: Clear writing is clear thinking.\n2. Sales: You're always selling your ideas, your projects, yourself.\n3. Storytelling: Weaving a narrative around your work makes it memorable and influential.",
-  "4. My biggest career failure? Spending 2 years on a project that was technically brilliant but solved a non-existent problem. Lesson learned: fall in love with the problem, not the solution. Customer obsession is your north star.",
-  "5. Your network is your net worth. But don't just collect contacts. Build genuine relationships. Help others win. The best opportunities come from people who know, like, and trust you. What's your best networking tip? #TechCareer"
+  "1. Forget the ladder, build a portfolio of high-impact projects. Your resume should be a highlight reel of problems you've solved, not a list of titles you've held. Show, don't tell. #CareerAdvice #Tech",
+  "2. Contrarian take: 'Find your passion' is bad advice. Instead, get good at something valuable. Passion follows mastery, not the other way around. The more skilled you become, the more you'll love what you do. #CareerGrowth #Skills",
+  "3. Mini-thread: 3 non-obvious skills that will 10x your career:\n1. Writing: Clear writing is clear thinking.\n2. Sales: You're always selling your ideas, your projects, yourself.\n3. Storytelling: Weaving a narrative around your work makes it memorable and influential. #SoftSkills #Leadership",
+  "4. My biggest career failure? Spending 2 years on a project that was technically brilliant but solved a non-existent problem. Lesson learned: fall in love with the problem, not the solution. Customer obsession is your north star. #Startup #ProductManagement",
+  "5. Your network is your net worth. But don't just collect contacts. Build genuine relationships. Help others win. The best opportunities come from people who know, like, and trust you. What's your best networking tip? #TechCareer #Networking"
 ]
