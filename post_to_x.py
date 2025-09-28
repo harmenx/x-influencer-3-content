@@ -49,6 +49,27 @@ except json.JSONDecodeError as e:
 
 logging.info(f"Loaded {len(tweets_to_post)} tweets from TWEET_TEXT.")
 
+# --- Image Handling ---
+media_id = None
+try:
+    image_dir = "post_images"
+    if os.path.exists(image_dir) and os.path.isdir(image_dir):
+        image_files = [f for f in os.listdir(image_dir) if os.path.isfile(os.path.join(image_dir, f))]
+        if image_files:
+            image_to_post = os.path.join(image_dir, random.choice(image_files))
+            logging.info(f"Selected image to post: {image_to_post}")
+
+            # Authenticate with v1.1 API for media upload
+            auth = tweepy.OAuth1UserHandler(consumer_key, consumer_secret, access_token, access_token_secret)
+            api = tweepy.API(auth)
+            media = api.media_upload(filename=image_to_post)
+            media_id = media.media_id_string
+            logging.info(f"Image uploaded successfully. Media ID: {media_id}")
+except Exception as e:
+    logging.error(f"Error handling image: {e}")
+# --- End of Image Handling ---
+
+
 # Authenticate with Tweepy
 try:
     client = tweepy.Client(
@@ -73,7 +94,10 @@ for i, tweet_part in enumerate(tweets_to_post):
         try:
             logging.info(f"Attempting to post tweet part {i+1}/{len(tweets_to_post)}: {tweet_part[:100]}...") # Log first 100 chars
             if i == 0:
-                response = client.create_tweet(text=tweet_part)
+                if media_id:
+                    response = client.create_tweet(text=tweet_part, media_ids=[media_id])
+                else:
+                    response = client.create_tweet(text=tweet_part)
             else:
                 # Wait for 30 seconds before posting subsequent tweets in a thread
                 logging.info("Waiting 30 seconds before posting next tweet part...")
