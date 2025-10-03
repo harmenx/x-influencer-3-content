@@ -41,7 +41,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git add generated_posts/*.md
           git diff-index --quiet HEAD || git commit -m "Auto-generate and post [skip ci]"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/harmenx/x-influencer.git HEAD:main
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/harmenx/x-influencer-3-content.git HEAD:main
 
       - name: Post to X (Twitter)
         run: python post_to_x.py
