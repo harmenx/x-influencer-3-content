@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install openai python-dotenv tweepy
+        run: pip install -r requirements.txt
 
       - name: Run Post Generation for AI Hottake
         id: generate

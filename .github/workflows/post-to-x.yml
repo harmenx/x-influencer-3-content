@@ -20,7 +20,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install openai python-dotenv tweepy
+        run: pip install -r requirements.txt
 
       - name: Run Post Generation
         id: generate
@@ -41,7 +41,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git add generated_posts/*.md
           git diff-index --quiet HEAD || git commit -m "Auto-generate and post [skip ci]"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/harmenx/x-influencer-3-content.git HEAD:main
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/harmenx/x-influencer.git HEAD:main
 
       - name: Post to X (Twitter)
         run: python post_to_x.py

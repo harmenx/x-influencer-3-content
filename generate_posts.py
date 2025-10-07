@@ -4,7 +4,7 @@ import json
 import sys
 from openai import OpenAI
 from datetime import datetime
-# from default_api import google_web_search
+from googlesearch import search
 import argparse
 
 # Initialize Poe client
@@ -17,18 +17,18 @@ client = OpenAI(
 POSTS_DIR = "generated_posts"
 os.makedirs(POSTS_DIR, exist_ok=True)
 
-# def get_recent_news():
-#     """Fetches recent news using a web search and returns a formatted string."""
-#     print("Fetching recent news...", file=sys.stderr)
-#     try:
-#         search_results = google_web_search(query="latest tech news")
-#         news_string = "Here is the latest news for context:\n"
-#         for result in search_results.get("results", [])[:5]:
-#             news_string += f"- {result.get('title')}: {result.get('snippet')}\n"
-#         return news_string
-#     except Exception as e:
-#         print(f"Error fetching news: {e}", file=sys.stderr)
-#         return ""
+def get_recent_news():
+    """Fetches recent news using a web search and returns a formatted string."""
+    print("Fetching recent news...", file=sys.stderr)
+    try:
+        search_results = search("latest tech news", num_results=5)
+        news_string = "Here is the latest news for context:\n"
+        for result in search_results:
+            news_string += f"- {result}\n"
+        return news_string
+    except Exception as e:
+        print(f"Error fetching news: {e}", file=sys.stderr)
+        return ""
 
 def generate_tweets(prompt):
     """Generates a list of tweets using the Poe API, expecting a JSON array response."""
@@ -79,9 +79,9 @@ if __name__ == "__main__":
     with open(args.prompt, "r", encoding="utf-8") as f:
         prompt_content = f.read()
 
-    # if "recent_news.txt" in args.prompt:
-    #     news = get_recent_news()
-    #     prompt_content = news + "\n" + prompt_content
+    if "recent_news.txt" in args.prompt:
+        news = get_recent_news()
+        prompt_content = news + "\n" + prompt_content
 
     tweets_list = generate_tweets(prompt_content)
     json_output = json.dumps(tweets_list)

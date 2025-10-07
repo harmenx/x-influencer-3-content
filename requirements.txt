@@ -1,0 +1,4 @@
+openai
+googlesearch-python
+python-dotenv
+tweepy
