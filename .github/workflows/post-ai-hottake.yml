@@ -1,9 +1,6 @@
 name: Post AI Hottake to X
 
 on:
-  schedule:
-    # Runs every 3 hours
-    - cron: '0 */3 * * *'
   workflow_dispatch:   # Allows manual trigger
 
 jobs:

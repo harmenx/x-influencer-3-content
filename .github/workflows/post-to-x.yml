@@ -2,9 +2,6 @@
 name: Generate and Post to X
 
 on:
-  schedule:
-    # Runs every 12 hours
-    - cron: '0 */12 * * *'
   workflow_dispatch:   # Allows manual trigger
 
 jobs:
